@@ -1,0 +1,20 @@
+<project>
+	<target name="tools">
+		<mkdir dir="dist"/>
+		<echo>Creating tools</echo>
+		<java fork="true" classname="org.aspectj.tools.ajc.Main">
+			<classpath>
+                                <!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=430930 -->
+				<pathelement path="libs/aspectjweaver-1.7.2.jar"/>
+                                <fileset dir="libs">
+				        <include name="*.jar"/>
+			        </fileset>
+                                <pathelement path="frontend/target/frontend-1.0-SNAPSHOT.jar"/>
+			</classpath>
+
+			<arg line="-inpath libs/aspectjtools-1.7.4.jar"/>
+			<arg line="-outjar dist/awesome_tools.jar"/>
+		</java>
+	</target> 
+</project>
+

@@ -20,5 +20,6 @@
   	<module>aspectjm</module>
   	<module>coolm</module>
   	<module>frontend</module>
+  	<module>coolf</module>
   </modules>
 </project>

@@ -1,4 +1,35 @@
 <project>
+	<target name="weaver">
+		<mkdir dir="dist"/>
+		<echo>Creating weaver</echo>
+		<taskdef resource="net/sf/antcontrib/antlib.xml"/>
+
+		<var name="inpath" value="platform/target/platform-1.0-SNAPSHOT.jar"/>
+		<if>
+			<isset property="mechanisms"/>
+			<then>
+				<for list="${mechanisms}" param="mechanism">
+					<sequential>
+						<var name="inpath" value="${inpath}${path.separator}@{mechanism}"/>
+					</sequential>
+				</for>
+			</then>
+		</if>
+
+		<java fork="true" classname="org.aspectj.tools.ajc.Main">
+			<classpath>
+				<pathelement path="libs/aspectjrt-1.7.4.jar"/>
+				<pathelement path="libs/aspectjtools-1.7.4.jar"/>
+				<fileset dir="libs">
+                                        <include name="*.jar"/>
+                                </fileset>
+			</classpath>
+
+			<arg line="-inpath ${inpath}"/>
+                        <arg line="-outjar dist/awesome_weaver.jar"/>
+		</java>
+	</target>
+
 	<target name="tools">
 		<mkdir dir="dist"/>
 		<echo>Creating tools</echo>

@@ -75,5 +75,9 @@
 			<arg line="-outjar dist/awesome_tools.jar"/>
 		</java>
 	</target> 
+
+	<target name="clean">
+		<delete dir="dist"/>
+	</target>
 </project>
 
